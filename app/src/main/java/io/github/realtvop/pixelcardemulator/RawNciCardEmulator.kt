@@ -48,7 +48,7 @@ internal object RawNfcDeviceCatalog {
     private val model = Build.MODEL.uppercase()
 
     val isAllowlisted: Boolean
-        get() = manufacturer in setOf("google", "samsung", "oneplus") ||
+        get() = manufacturer in setOf("google", "samsung", "oneplus", "oppo") ||
             (manufacturer == "sony" && model == "XQ-EC72")
 
     val profile: RawProfile
@@ -63,7 +63,7 @@ internal object RawNfcDeviceCatalog {
     val allowsDiscoveryTechnologyFallback: Boolean
         get() = when (manufacturer) {
             "samsung" -> Build.VERSION.SDK_INT == 35
-            "oneplus" -> Build.VERSION.SDK_INT >= 35
+            "oneplus", "oppo" -> Build.VERSION.SDK_INT >= 35
             "sony" -> model == "XQ-EC72" && Build.VERSION.SDK_INT >= 35
             else -> false
         }
